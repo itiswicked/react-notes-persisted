@@ -1,0 +1,56 @@
+@import './variables';
+@import './Colors';
+
+.notes-pane {
+  border-left: $grey-border;
+  border-right: $grey-border;
+  padding-left: 0;
+  padding-right: 0;
+  height: 496px;
+
+}
+
+.note-list {
+  max-height: 440px;
+  overflow-y: auto;
+}
+
+.notes-topbar {
+  background-color: $light-grey;
+  border-bottom: $grey-border;
+  padding: 6px 5px 6px 5px;
+}
+
+.my-button {
+  background-color: white;
+  display: inline-block;
+  border: 2px solid black;
+  padding: 5px;
+  box-shadow: 2px 2px 0px 0px rgba(0,0,0,1);
+}
+
+.search-form {
+  margin-left: 10px;
+  display: inline-block;
+  width: 200px;
+}
+
+.search-field {
+  margin-bottom: 0;
+  border-radius: 20px;
+}
+
+.notespane-note {
+  padding-left: 10px;
+  border-bottom: $grey-border;
+  span {
+    display: block;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.highlight {
+  background-color: $yellow;
+}

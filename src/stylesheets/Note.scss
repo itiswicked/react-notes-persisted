@@ -1,0 +1,46 @@
+@import './variables';
+@import './Colors';
+
+.note-pane {
+  padding-left: 0;
+  padding-right: 0;
+  height: 100%;
+
+  .note-edit-area {
+    resize: none;
+    padding: 0;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    height: 435px;
+    &:focus {
+      border: none;
+      box-shadow: none;
+    }
+  }
+}
+
+.note-topbar {
+  position: relative;
+  padding-top: 10px;
+  background-color: $light-grey;
+  border-bottom: $grey-border;
+  height: 53px;
+  span, button {
+    margin-left: 10px;
+  }
+
+  .button-wrapper {
+    float: right;
+    padding-right: 10px;
+  }
+
+  .updated-at {
+    position: absolute;
+    margin-top: 3px;
+  }
+}
+
+.note-body {
+  padding: 5px;
+}

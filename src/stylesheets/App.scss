@@ -1,0 +1,13 @@
+/* YOUR STYLING HERE */
+@import './variables';
+@import './Colors';
+
+.app {
+  width: 1000px;
+  height: 500px;
+  margin: 20px auto;
+  border: $grey-border;
+}
+.app-wrapper {
+  height: 100%;
+}
