@@ -3,6 +3,7 @@ import React from 'react';
 import FoldersPane from './folders/FoldersPane.js';
 import NotesPane from './notes/NotesPane.js';
 import NotePane from './note/NotePane.js';
+import 'whatwg-fetch';
 
 class App extends React.Component {
   constructor(props) {
@@ -16,6 +17,13 @@ class App extends React.Component {
     this.handleFolderClick = this.handleFolderClick.bind(this);
     this.onFolderSubmit = this.onFolderSubmit.bind(this);
     this.onFolderFormChange = this.onFolderFormChange.bind(this);
+  }
+
+  componentWillMount() {
+    fetch('http://localhost:4567/folders.json')
+      .then(response => response.json())
+      .then(json => this.setState({folders: json.folders}))
+      .catch(error => console.error("Error in GET /folders.json: ", error))
   }
 
   onFolderSubmit(e) {
