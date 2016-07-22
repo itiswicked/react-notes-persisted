@@ -1,9 +1,10 @@
 var webpack = require('webpack');
 
 module.exports = {
-  entry: {
-    path: './src/main.js'
-  },
+  entry: [
+    'whatwg-fetch',
+    './src/main.js'
+  ],
   output: {
     path: './build',
     filename: 'bundle.js'
