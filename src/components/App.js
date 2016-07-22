@@ -30,16 +30,23 @@ class App extends React.Component {
     e.preventDefault();
     if(this.state.newFolderFieldValue === '') return;
 
-    let lastFolder = this.state.folders[this.state.folders.length - 1];
-    let newId = 1;
-    if(lastFolder) newId = lastFolder.id + 1;
-
-    let newFolder = {name: this.state.newFolderFieldValue, id: newId};
-    let allFolders = this.state.folders.concat(newFolder);
-
-    this.setState({folders: allFolders});
-    this.setState({selectedFolderId: newId});
-    this.setState({newFolderFieldValue: ''});
+    fetch("http://localhost:4567/folders.json", {
+      method: 'POST',
+      body: JSON.stringify({
+        folder: {
+          name: this.state.newFolderFieldValue
+        }
+      })
+    })
+    .then(response => response.json())
+    .then(json => {
+      let newFolder = json.folder
+      let allFolders = this.state.folders.concat(newFolder);
+      this.setState({folders: allFolders});
+      this.setState({newFolderFieldValue: ''});
+      this.setState({selectedFolderId: newFolder.id});
+    })
+    .catch(error => console.error("Error in POST /folders.json: ", error));
   }
 
   onFolderFormChange(e) {
