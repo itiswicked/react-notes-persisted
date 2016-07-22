@@ -70,15 +70,10 @@ class App extends React.Component {
           onFolderSubmit={this.onFolderSubmit}
           onFolderFormChange={this.onFolderFormChange}
         />
-        <NotesPane
-          selectedFolderId={this.state.selectedFolderId}
-          handleNoteCreate={this.handleNoteCreate}
-        />
+        <NotesPane selectedFolderId={this.state.selectedFolderId} />
       </div>
     );
   }
 }
-
-// <NotePane />
 
 export default App;
