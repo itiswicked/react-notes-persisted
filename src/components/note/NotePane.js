@@ -26,16 +26,17 @@ class NotePane extends React.Component {
   }
 
   render() {
+    let body;
+    let updatedAt;
     if(this.state.note) {
-      let date = new Date(this.state.note.updatedAt);
-      let formattedDate = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`
-      var updatedOn = "Updated on " + formattedDate;
+      body = this.state.note.body;
+      updatedAt = this.state.note.updated_at
     }
 
     return(
       <div className="small-4 columns note-pane">
         <div className="note-topbar">
-          <span className="updated-at"><strong>{updatedOn || ""}</strong></span>
+          <span className="updated-at"><strong>Updated{updatedAt}</strong></span>
           <div className="button-wrapper">
             <button className="my-button">Update</button>
             <button onClick={this.handleNoteDelete} className="my-button">Delete</button>
@@ -45,7 +46,7 @@ class NotePane extends React.Component {
           <textarea
             className="note-edit-area"
             onChange={this.handleNoteUpdate}
-            value={this.state.note ? this.state.note.body : ""}
+            value={body}
           />
         </div>
       </div>

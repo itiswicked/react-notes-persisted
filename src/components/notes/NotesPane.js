@@ -25,9 +25,16 @@ class NotesPane extends React.Component {
     let folderId = nextProps.selectedFolderId;
     if(folderId) {
       fetch(`http://localhost:4567/folders/${folderId}/notes.json`)
-      .then(response => response.json())
+      .then(response => {
+        return response.json();
+      })
       .then(json => {
-        this.setState({notes: json.notes})
+        let notes = json.notes;
+        this.setState({notes: notes})
+        if(notes.length > 0) {
+          let firstNoteId = notes[0].id;
+          this.setState({selectedNoteId: firstNoteId})
+        }
       })
       .catch(error => console.error("Error in fetch GET /notes.json", error));
     }
@@ -88,7 +95,6 @@ class NotesPane extends React.Component {
     return this
       .state
       .notes
-      .filter(note => note.folderId === this.props.selectedFolderId)
       .filter(this.bySearchTerm.bind(this))
       .map(this.createNoteListNode.bind(this));
   }

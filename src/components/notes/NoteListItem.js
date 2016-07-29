@@ -12,15 +12,12 @@ const NoteListItem = props => {
     }
     title = title.split("\n")[0]
   }
-
-  let date = new Date(props.updatedAt)
-  let formattedDate = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`
-  let onClick = () =>  props.handleNoteClick(props.id);
+  let onClick = () => props.handleNoteClick(props.id);
 
   return(
     <article className={props.noteClasses} onClick={onClick}>
       <span><strong>{title}</strong></span>
-      <span>{formattedDate}</span>
+      <span>{props.updated_at}</span>
     </article>
   )
 }
