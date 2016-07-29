@@ -3,6 +3,7 @@ require "sinatra/json"
 require "json"
 require_relative "folder"
 require_relative "note"
+require 'pry'
 
 before do
   headers({ "Access-Control-Allow-Origin" => "*" })
@@ -31,7 +32,6 @@ end
 
 get "/folders/:folder_id/notes.json" do
   folder = Folder.find_by(id: params[:folder_id].to_i)
-
   if folder
     notes = folder.notes
     status 200

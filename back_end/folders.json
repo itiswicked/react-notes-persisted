@@ -1,5 +1,28 @@
 {
   "folders": [
-
+    {
+      "id": 1,
+      "name": "something"
+    },
+    {
+      "id": 2,
+      "name": "in the way"
+    },
+    {
+      "id": 3,
+      "name": "she moves"
+    },
+    {
+      "id": 4,
+      "name": "tells me that"
+    },
+    {
+      "id": 5,
+      "name": "i need no"
+    },
+    {
+      "id": 6,
+      "name": "other lover"
+    }
   ]
 }

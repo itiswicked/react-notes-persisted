@@ -1,5 +1,10 @@
 {
   "notes": [
-
+    {
+      "id": 1,
+      "folder_id": 1,
+      "body": "The Beatles",
+      "updated_at": "1/1/2016"
+    }
   ]
 }
