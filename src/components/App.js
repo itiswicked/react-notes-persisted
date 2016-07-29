@@ -22,7 +22,10 @@ class App extends React.Component {
   componentWillMount() {
     fetch('http://localhost:4567/folders.json')
       .then(response => response.json())
-      .then(json => this.setState({folders: json.folders}))
+      .then(json => {
+        this.setState({folders: json.folders})
+        this.setState({selectedFolderId: json.folders[0].id})
+      })
       .catch(error => console.error("Error in GET /folders.json: ", error))
   }
 
