@@ -46,7 +46,6 @@ post "/folders/:folder_id/notes.json" do
   request_body = JSON.parse(request_body_string)
   note_params = request_body["note"]
   folder = Folder.find_by(id: params[:folder_id].to_i)
-  binding.pry
 
   if folder
     note_params["folder_id"] = folder.id

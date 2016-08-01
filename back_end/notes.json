@@ -2,9 +2,27 @@
   "notes": [
     {
       "id": 1,
-      "folder_id": 1,
       "body": "The Beatles",
-      "updated_at": "1/1/2016"
+      "updated_at": "1/1/2016",
+      "folder_id": 1
+    },
+    {
+      "id": 2,
+      "body": "New Note",
+      "updated_at": "8/1/2016",
+      "folder_id": 1
+    },
+    {
+      "id": 3,
+      "body": "New Note",
+      "updated_at": "8/1/2016",
+      "folder_id": 1
+    },
+    {
+      "id": 4,
+      "body": "New Note",
+      "updated_at": "8/1/2016",
+      "folder_id": 2
     }
   ]
 }

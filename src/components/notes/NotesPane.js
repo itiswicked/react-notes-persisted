@@ -75,23 +75,22 @@ class NotesPane extends React.Component {
     };
 
     fetch(`http://localhost:4567/folders/${folder_id}/notes.json`, {
-        method: "POST",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({note: newNote, folder_id})
-      })
-      .then(response => response.json())
-      .then(json => {
-        console.log(json.note);
-        let notes = json.notes
-        this.setState({notes: notes});
-        this.setState({selectedNoteId: newId});
-      })
-
-    this.setState({notes: notes});
-    this.setState({selectedNoteId: newId});
+        method: 'POST',
+        body: JSON.stringify({
+          note: {
+            body: 'New Note',
+            folder_id: folder_id
+          }
+        })
+    })
+    .then(response => response.json())
+    .then(json => {
+      console.log(json.note);
+      let newNote = json.note;
+      let newNotes = this.state.notes.concat(newNote);
+      this.setState({notes: newNotes});
+      this.setState({selectedNoteId: newNote.id});
+    })
   }
 
   deleteNote(id) {
