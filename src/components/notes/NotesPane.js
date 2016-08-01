@@ -22,9 +22,9 @@ class NotesPane extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let folderId = nextProps.selectedFolderId;
-    if(folderId) {
-      fetch(`http://localhost:4567/folders/${folderId}/notes.json`)
+    let { selectedFolderId } = nextProps;
+    if(selectedFolderId) {
+      fetch(`http://localhost:4567/folders/${selectedFolderId}/notes.json`)
       .then(response => {
         return response.json();
       })
@@ -64,19 +64,33 @@ class NotesPane extends React.Component {
 
   handleNoteCreate() {
     if(!this.props.selectedFolderId) return;
-    let lastNote = this.state.notes[this.state.notes.length - 1];
-    let newId = 1;
-    if(lastNote) newId = lastNote.id + 1;
+    // let lastNote = this.state.notes[this.state.notes.length - 1];
+    // let newId = 1;
+    // if(lastNote) newId = lastNote.id + 1;
+    let folder_id = this.props.selectedFolderId
 
     let newNote = {
       body: '',
-      updatedAt: Date.now(),
-      id: newId,
-      folderId: this.props.selectedFolderId
+      folder_id: folder_id
     };
 
-    let allNotes = this.state.notes.concat(newNote);
-    this.setState({notes: allNotes});
+    fetch(`http://localhost:4567/folders/${folder_id}/notes.json`, {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({note: newNote, folder_id})
+      })
+      .then(response => response.json())
+      .then(json => {
+        console.log(json.note);
+        let notes = json.notes
+        this.setState({notes: notes});
+        this.setState({selectedNoteId: newId});
+      })
+
+    this.setState({notes: notes});
     this.setState({selectedNoteId: newId});
   }
 
