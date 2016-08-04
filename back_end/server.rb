@@ -6,7 +6,11 @@ require_relative "note"
 require 'pry'
 
 before do
-  headers({ "Access-Control-Allow-Origin" => "*" })
+  headers "Access-Control-Allow-Origin" => "*"
+end
+
+options "*" do
+  headers "Access-Control-Allow-Methods" => "POST, GET, OPTIONS, PUT, DELETE"
 end
 
 get "/folders.json" do
@@ -81,10 +85,10 @@ end
 
 delete "/notes/:id.json" do
   note = Note.find_by(id: params[:id].to_i)
+
   if note
     note.destroy
     status 204
-    json note: note
   else
     status 404
   end
