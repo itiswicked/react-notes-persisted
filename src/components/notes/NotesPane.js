@@ -64,39 +64,49 @@ class NotesPane extends React.Component {
 
   handleNoteCreate() {
     if(!this.props.selectedFolderId) return;
-    // let lastNote = this.state.notes[this.state.notes.length - 1];
-    // let newId = 1;
-    // if(lastNote) newId = lastNote.id + 1;
     let folder_id = this.props.selectedFolderId
 
     let newNote = {
-      body: '',
+      body: 'New Note',
       folder_id: folder_id
     };
 
     fetch(`http://localhost:4567/folders/${folder_id}/notes.json`, {
         method: 'POST',
-        body: JSON.stringify({
-          note: {
-            body: 'New Note',
-            folder_id: folder_id
-          }
-        })
+        body: JSON.stringify({note: newNote})
     })
     .then(response => response.json())
     .then(json => {
-      console.log(json.note);
       let newNote = json.note;
       let newNotes = this.state.notes.concat(newNote);
       this.setState({notes: newNotes});
       this.setState({selectedNoteId: newNote.id});
     })
+    .catch(error => console.error('Error in POST /folders/:folder_id/notes.json', error));
   }
 
   deleteNote(id) {
-    let newNotes = this.state.notes.filter(note => note.id !== id);
-    this.setState({notes: newNotes});
-    this.setState({selectedNoteId: null});
+    fetch(`http://localhost:4567/notes/${id}.json`, {method: 'DELETE'})
+    .then(response => {
+      if(response.ok) {
+        let { notes } = this.state;
+        let oldNoteIndex = notes.findIndex(note => note.id === id);
+        let newNotes = notes.filter(note => note.id != id);
+
+        let previousNote = notes[oldNoteIndex - 1]
+        let nextNote = notes[oldNoteIndex + 1]
+
+        this.setState({notes: newNotes})
+        if(previousNote) {
+          this.setState({selectedNoteId: previousNote.id});
+        } else if (nextNote) {
+          this.setState({selectedNoteId: nextNote.id});
+        } else {
+          this.setState({selectedNoteId: null});
+        }
+      }
+    })
+    .catch(error => console.error(error))
   }
 
   searchFilter(e){
