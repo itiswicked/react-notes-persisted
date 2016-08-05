@@ -1,4 +1,5 @@
 import React from 'react';
+import DebounceInput from 'react-debounce-input';
 
 import NoteTopBar from './NoteTopBar';
 
@@ -26,27 +27,31 @@ class NotePane extends React.Component {
   }
 
   render() {
-    let body;
+    let body = "";
     let updatedAt;
+    let deleteButton = <div></div>;
     if(this.state.note) {
       body = this.state.note.body;
-      updatedAt = this.state.note.updated_at
+      updatedAt = `Updated ${this.state.note.updated_at}`
+      deleteButton = <button onClick={this.handleNoteDelete} className="my-button">Delete</button>;
     }
 
     return(
       <div className="small-4 columns note-pane">
         <div className="note-topbar">
-          <span className="updated-at"><strong>Updated{updatedAt}</strong></span>
+          <span className="updated-at"><strong>{updatedAt}</strong></span>
           <div className="button-wrapper">
-            <button className="my-button">Update</button>
-            <button onClick={this.handleNoteDelete} className="my-button">Delete</button>
+            {deleteButton}
           </div>
         </div>
         <div className="note-body">
-          <textarea
+          <DebounceInput
             className="note-edit-area"
-            onChange={this.handleNoteUpdate}
+            minLength={2}
+            debounceTimeout={1000}
+            element="textarea"
             value={body}
+            onChange={this.handleNoteUpdate}
           />
         </div>
       </div>

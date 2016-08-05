@@ -122,4 +122,3 @@ class Note
     File.write(NOTES_JSON_FILE, notes_data_string)
   end
 end
-

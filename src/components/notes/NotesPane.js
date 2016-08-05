@@ -46,20 +46,33 @@ class NotesPane extends React.Component {
   }
 
   updateNoteBody(noteId, noteBody) {
-    let currentNotes = this.state.notes;
-    let noteIndex = currentNotes.findIndex(note => note.id === noteId);
+    fetch(`http://localhost:4567/notes/${noteId}.json`, {
+      method: 'PATCH',
+      body: JSON.stringify({
+        note: {
+          body: noteBody,
+        }
+      })
+    })
+    .then(response => {
+      if (response.ok) {
+        let currentNotes = this.state.notes;
+        let noteIndex = currentNotes.findIndex(note => note.id === noteId);
 
-    let updatedNote = update(
-      this.state.notes[noteIndex],
-      { body: {$set: noteBody} }
-    );
+        let updatedNote = update(
+          this.state.notes[noteIndex],
+          { body: {$set: noteBody} }
+        );
 
-    let newNotes = update(
-      currentNotes,
-      { $splice: [[noteIndex, 1, updatedNote]] }
-    );
+        let newNotes = update(
+          currentNotes,
+          { $splice: [[noteIndex, 1, updatedNote]] }
+        );
 
-    this.setState({notes: newNotes});
+        this.setState({notes: newNotes});
+      }
+    })
+    .catch(error => console.error("Error in PATCH /notes/:id.json ", error))
   }
 
   handleNoteCreate() {

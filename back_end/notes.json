@@ -1,28 +1,40 @@
 {
   "notes": [
     {
-      "id": 1,
-      "body": "The Beatles",
-      "updated_at": "1/1/2016",
+      "id": 7,
+      "body": "New Note",
+      "updated_at": "8/5/2016",
+      "folder_id": 7
+    },
+    {
+      "id": 10,
+      "body": "New Note",
+      "updated_at": "8/5/2016",
+      "folder_id": 5
+    },
+    {
+      "id": 11,
+      "body": "New Note",
+      "updated_at": "8/5/2016",
+      "folder_id": 5
+    },
+    {
+      "id": 12,
+      "body": "New Note",
+      "updated_at": "8/5/2016",
+      "folder_id": 5
+    },
+    {
+      "id": 13,
+      "body": "New Note",
+      "updated_at": "8/5/2016",
       "folder_id": 1
     },
     {
-      "id": 2,
+      "id": 14,
       "body": "New Note",
-      "updated_at": "8/1/2016",
+      "updated_at": "8/5/2016",
       "folder_id": 1
-    },
-    {
-      "id": 3,
-      "body": "New Note",
-      "updated_at": "8/1/2016",
-      "folder_id": 1
-    },
-    {
-      "id": 4,
-      "body": "New Note",
-      "updated_at": "8/1/2016",
-      "folder_id": 2
     }
   ]
 }

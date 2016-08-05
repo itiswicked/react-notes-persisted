@@ -10,7 +10,7 @@ before do
 end
 
 options "*" do
-  headers "Access-Control-Allow-Methods" => "POST, GET, OPTIONS, PUT, DELETE"
+  headers "Access-Control-Allow-Methods" => "POST, GET, OPTIONS, PUT, PATCH, DELETE"
 end
 
 get "/folders.json" do
@@ -70,6 +70,7 @@ end
 patch "/notes/:id.json" do
   request_body_string = request.body.read
   request_body = JSON.parse(request_body_string)
+  # binding.pry
   note_params = request_body["note"]
   note = Note.find_by(id: params[:id].to_i)
 
